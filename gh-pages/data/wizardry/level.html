@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Level</title>
+  <style>
+    /*RESET*/
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <style>
+    .wall,
+    .ground,
+    .start,
+    .end {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      vertical-align: top;
+      border: 1px solid #FFF;
+    }
+
+    .wall {
+      background: red;
+    }
+
+    .ground {
+      background: blue;
+    }
+
+    .start {
+      background: yellow;
+    }
+
+    .end {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const ground = 0;
+    const wall = 1;
+    const start = 2;
+    const end = 3;
+    const level =
+      JSON.parse(decodeURIComponent(window.location.search).substring(1))
+
+    const levelNode = document.createElement("div")
+    levelNode.className = "level"
+
+    function node(kind) {
+      const node = document.createElement("div")
+      switch (kind) {
+        case wall:
+          node.className = "wall"
+          break;
+        case start:
+          node.className = "start"
+          break;
+        case end:
+          node.className = "end"
+          break;
+        case ground:
+        default:
+          node.className = "ground"
+          break;
+      }
+      return node;
+    }
+
+    level.reduce(
+      (acc, itemsInRow) => {
+        acc.appendChild(
+          itemsInRow.reduce((acc2, nodeType) => {
+            acc2.appendChild(node(nodeType));
+            return acc2;
+          }
+            , document.createElement("div"))
+        );
+        return acc
+      }, levelNode);
+    document.body.appendChild(levelNode)
+  </script>
+</body>
+
+</html>

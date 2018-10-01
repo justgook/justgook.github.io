@@ -1,0 +1,36 @@
+[
+  [
+    "Projects",
+    [
+      [
+        "WebDriver in Elm",
+        "#/webdriver"
+      ],
+      [
+        "Tiled Platformer",
+        "/elm-platformer"
+      ],
+      [
+        "Bomberman in Elm",
+        ""
+      ],
+      [
+        "React Sokoban",
+        ""
+      ]
+    ]
+  ],
+  [
+    "Tutorial",
+    [
+      [
+        "Game Development Setup",
+        "/wizardry/setup"
+      ],
+      [
+        "Render Map (HTML, Canvas, WebGL, OpenGL)",
+        "wizardry/level"
+      ]
+    ]
+  ]
+]
