@@ -18,7 +18,7 @@ Level is quite simple 3x3 tiles, where free cell is wrapped in walls.
 
 But that is to borring lets make some maze
 
-<iframe-code src="/data/wizardry/level.htm" lang="json">[
+<iframe-code src="/data/wizardry/level.html" lang="json">[
     [1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 1, 0, 0, 0, 0, 1],
     [1, 0, 1, 0, 1, 1, 0, 1],
@@ -31,7 +31,7 @@ But that is to borring lets make some maze
 
 So You have map - next step is add start and end point, for start `2` (yellow) and for end `3` (green)
 
-<iframe-code src="/data/wizardry/level.htm" lang="json">[
+<iframe-code src="/data/wizardry/level.html" lang="json">[
     [1, 1, 1, 1, 1, 1, 1, 1],
     [1, 2, 1, 0, 0, 0, 0, 1],
     [1, 0, 1, 0, 1, 1, 0, 1],
