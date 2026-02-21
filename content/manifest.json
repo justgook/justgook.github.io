@@ -1,0 +1,18 @@
+{
+  "page_size": 10,
+  "posts": {
+    "total": 1,
+    "pages": 1,
+    "items": [
+      {"slug":"hello-world","file":"content/posts/hello-world.md","date":"2026-02-21","title":"Hello, World","description":"First post. About the site and why I built it this way.","tags":["meta","web"],"featured":true,"status":""}
+    ]
+  },
+  "projects": {
+    "total": 2,
+    "pages": 1,
+    "items": [
+      {"slug":"justgook-site","file":"content/projects/justgook-site.md","date":"","title":"This site","description":"Personal portfolio driven entirely by Markdown. No build system, no npm, no lock files.","tags":["javascript","markdown","web"],"featured":false,"status":"active"},
+      {"slug":"stbte","file":"content/projects/stbte.md","date":"","title":"stbte — headless tilemap editor","description":"Headless WASM port of Sean Barrett's stb_tilemap_editor.h. 73% smaller, pure JS frontend.","tags":["zig","wasm","c","tools"],"featured":true,"status":"active"}
+    ]
+  }
+}
