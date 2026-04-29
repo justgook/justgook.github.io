@@ -32,12 +32,12 @@ function setupMarked() {
   marked.setOptions({ gfm: true, breaks: false, pedantic: false });
 
   const renderer = new marked.Renderer();
-  renderer.code = ({ text, lang }) => {
+  renderer.code = (text, lang) => {
     let highlighted = text;
     if (lang && hljs.getLanguage(lang)) {
-      try { highlighted = hljs.highlight(text, { language: lang, ignoreIllegals: true }).value; } catch (_) {}
+      try { highlighted = hljs.highlight(text, { language: lang, ignoreIllegals: true }).value; } catch (_) { }
     } else {
-      try { highlighted = hljs.highlightAuto(text).value; } catch (_) {}
+      try { highlighted = hljs.highlightAuto(text).value; } catch (_) { }
     }
     return `<pre><code class="hljs language-${lang ?? ''}">${highlighted}</code></pre>`;
   };
@@ -93,7 +93,7 @@ async function loadConfig() {
    ============================================================ */
 let manifest = {
   page_size: 10,
-  posts:    { total: 0, pages: 1, items: [] },
+  posts: { total: 0, pages: 1, items: [] },
   projects: { total: 0, pages: 1, items: [] },
 };
 
@@ -103,12 +103,12 @@ async function loadManifest() {
     // Normalise: support both legacy flat-array shape and new paginated shape
     manifest = {
       page_size: raw.page_size ?? 10,
-      posts:    Array.isArray(raw.posts)
-                  ? { total: raw.posts.length, pages: 1, items: raw.posts }
-                  : (raw.posts ?? { total: 0, pages: 1, items: [] }),
+      posts: Array.isArray(raw.posts)
+        ? { total: raw.posts.length, pages: 1, items: raw.posts }
+        : (raw.posts ?? { total: 0, pages: 1, items: [] }),
       projects: Array.isArray(raw.projects)
-                  ? { total: raw.projects.length, pages: 1, items: raw.projects }
-                  : (raw.projects ?? { total: 0, pages: 1, items: [] }),
+        ? { total: raw.projects.length, pages: 1, items: raw.projects }
+        : (raw.projects ?? { total: 0, pages: 1, items: [] }),
     };
   } catch (e) {
     console.warn('[app] manifest load failed:', e.message);
@@ -181,7 +181,7 @@ function paginationHTML(section, currentPage, totalPages) {
    Header / Footer population
    ============================================================ */
 function buildNav(currentRoute) {
-  const navEl  = $('#site-nav');
+  const navEl = $('#site-nav');
   const titleEl = $('#site-title');
   if (titleEl) titleEl.textContent = siteConfig.title;
   document.title = siteConfig.title;
@@ -189,7 +189,7 @@ function buildNav(currentRoute) {
 
   const navLinks = (siteConfig.nav ?? []).map(item => {
     const route = item.route ?? '#/';
-    const href  = route.startsWith('#') ? route : `#${route}`;
+    const href = route.startsWith('#') ? route : `#${route}`;
     // Active if the current path starts with this nav route (handles sub-pages)
     const isActive = currentRoute && currentRoute.startsWith(item.route ?? route);
     return `<a href="${href}" class="${isActive ? 'active' : ''}">${item.label}</a>`;
@@ -206,7 +206,7 @@ function buildNav(currentRoute) {
 function buildFooter() {
   const el = $('#site-footer');
   if (!el) return;
-  const year   = new Date().getFullYear();
+  const year = new Date().getFullYear();
   const social = (siteConfig.social ?? []).map(s =>
     `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a>`
   ).join('');
@@ -221,8 +221,8 @@ function buildFooter() {
 
 /** Render a card from a manifest item (data fields are top-level) */
 function cardHTML(item, section) {
-  const href   = `#/${section}/${item.slug}`;
-  const date   = item.date   ? `<span class="card-meta">${formatDate(item.date)}</span>`   : '';
+  const href = `#/${section}/${item.slug}`;
+  const date = item.date ? `<span class="card-meta">${formatDate(item.date)}</span>` : '';
   const status = item.status ? `<span class="card-meta">${item.status}</span>` : '';
   return `
     <a class="card" href="${href}">
@@ -240,7 +240,7 @@ async function renderHome() {
   const { content: heroContent } = parseFrontmatter(homeRaw);
   const heroHtml = renderMarkdown(heroContent);
 
-  const featuredPosts    = manifest.posts.items.filter(i => i.featured);
+  const featuredPosts = manifest.posts.items.filter(i => i.featured);
   const featuredProjects = manifest.projects.items.filter(i => i.featured);
 
   const postCardsHtml = featuredPosts.length
@@ -416,8 +416,8 @@ function renderNotFound(path) {
      #/contact              → contact page
    ============================================================ */
 async function route() {
-  const hash  = location.hash || '#/';
-  const path  = hash.replace(/^#\/?/, '');
+  const hash = location.hash || '#/';
+  const path = hash.replace(/^#\/?/, '');
   const parts = path ? path.split('/') : [];
   const [section, sub, pageStr] = parts;
 
@@ -430,15 +430,15 @@ async function route() {
       break;
 
     case 'blog':
-      if (!sub)                              await renderBlog(1);
-      else if (sub === 'page' && pageStr)    await renderBlog(Math.max(1, parseInt(pageStr, 10) || 1));
-      else                                   await renderPost(sub);
+      if (!sub) await renderBlog(1);
+      else if (sub === 'page' && pageStr) await renderBlog(Math.max(1, parseInt(pageStr, 10) || 1));
+      else await renderPost(sub);
       break;
 
     case 'projects':
-      if (!sub)                              await renderProjects(1);
-      else if (sub === 'page' && pageStr)    await renderProjects(Math.max(1, parseInt(pageStr, 10) || 1));
-      else                                   await renderProject(sub);
+      if (!sub) await renderProjects(1);
+      else if (sub === 'page' && pageStr) await renderProjects(Math.max(1, parseInt(pageStr, 10) || 1));
+      else await renderProject(sub);
       break;
 
     case 'resume':

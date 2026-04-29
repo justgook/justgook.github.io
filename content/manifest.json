@@ -1,9 +1,10 @@
 {
   "page_size": 10,
   "posts": {
-    "total": 1,
+    "total": 2,
     "pages": 1,
     "items": [
+      {"slug":"tilemap-lut","file":"content/posts/tilemap-lut.md","date":"2026-04-26","title":"Tilemaps as Lookup Textures","description":"A compact note about drawing tilemaps by storing tile indices in a texture and resolving them in the shader.","tags":["rendering","tilemap","gpu","shader"],"featured":false,"status":""},
       {"slug":"hello-world","file":"content/posts/hello-world.md","date":"2026-02-21","title":"Hello, World","description":"First post. About the site and why I built it this way.","tags":["meta","web"],"featured":true,"status":""}
     ]
   },
